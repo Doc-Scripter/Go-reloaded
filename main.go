@@ -35,11 +35,11 @@ func main() {
 		// Apply corrections until the result can't be changed further
 		for {
 			// Apply all modifications
-			Result := inhouse.Vowel(line)
+			Result := inhouse.Punctuation(line)
+			Result = inhouse.Vowel(Result)
 			Result = inhouse.Hex(Result)
 			Result = inhouse.Bin(Result)
 			Result = inhouse.Modify(Result)
-			Result = inhouse.Punctuation(Result)
 
 			// Check if the result has changed from the previous iteration
 			if Result == previousResult {

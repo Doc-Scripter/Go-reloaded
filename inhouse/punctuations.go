@@ -29,5 +29,7 @@ func Punctuation(s string) string {
 
 	s = pattern.ReplaceAllString(s, "$1$2")
 
+	// find characters and spaces after and before a bracket
+
 	return s
 }
