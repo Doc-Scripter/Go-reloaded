@@ -30,6 +30,13 @@ func Punctuation(s string) string {
 	s = pattern.ReplaceAllString(s, "$1$2")
 
 	// find characters and spaces after and before a bracket
+	pattern = regexp.MustCompile(`\s*\S*(\()`)
+
+	s = pattern.ReplaceAllString(s, ` $1`)
+
+	pattern = regexp.MustCompile(`(\))(\s*)(\S*)`)
+
+	s = pattern.ReplaceAllString(s, `$1 $2$3`)
 
 	return s
 }
