@@ -42,7 +42,7 @@ func Modify(s string) string {
 			if number > len(s[:i]) {
 				fmt.Println("The words to be modified are less than specified")
 			}
-			if err == nil && number <= i {
+			if number <= i {
 				// Apply the function 'f' to the preceding 'number' of words
 				for j := i - number; j < i; j++ {
 					word[j] = f(word[j])
@@ -54,14 +54,19 @@ func Modify(s string) string {
 			// Remove the current word
 			word = append(word[:i], word[i+2:]...)
 			i--
-		} else if strings.Contains(word[i], "(cap)") || strings.Contains(word[i], "(up)") || strings.Contains(word[i], "(low)") {
-			// Apply the function 'f' to the preceding word
-			if i > 0 {
-				word[i-1] = f(word[i-1])
+		} else {
+			subString := []string{"(cap)", "(low)", "(up)"}
+			for _, subStr := range subString {
+				if strings.Contains(strings.ToLower(word[i]), subStr) {
+					// Apply the function 'f' to the preceding word
+					if i > 0 {
+						word[i-1] = f(word[i-1])
+					}
+					// Remove the current word
+					word = append(word[:i], word[i+1:]...)
+					i--
+				}
 			}
-			// Remove the current word
-			word = append(word[:i], word[i+1:]...)
-			i--
 		}
 	}
 	return strings.Join(word, " ")
